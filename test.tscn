@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctc85t220eipc"]
+
+[ext_resource type="PackedScene" uid="uid://cfhgf64abji5j" path="res://code/particle.tscn" id="1_pmg1p"]
+[ext_resource type="Script" path="res://data/custom/atom.gd" id="2_qccls"]
+
+[sub_resource type="Resource" id="Resource_tl660"]
+script = ExtResource("2_qccls")
+n = 11
+bonds = Array[Resource("res://data/custom/bond.gd")]([])
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_x8g07"]
+script = ExtResource("2_qccls")
+n = 17
+bonds = Array[Resource("res://data/custom/bond.gd")]([])
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_ebtvj"]
+script = ExtResource("2_qccls")
+n = 1
+bonds = Array[Resource("res://data/custom/bond.gd")]([])
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_dldag"]
+script = ExtResource("2_qccls")
+n = 1
+bonds = Array[Resource("res://data/custom/bond.gd")]([])
+position = Vector2(0, 0)
+
+[node name="Root" type="Node2D"]
+
+[node name="Particle1" parent="." instance=ExtResource("1_pmg1p")]
+position = Vector2(288, 162)
+data = SubResource("Resource_tl660")
+
+[node name="Particle2" parent="." instance=ExtResource("1_pmg1p")]
+position = Vector2(102, 150)
+data = SubResource("Resource_x8g07")
+
+[node name="Particle3" parent="." instance=ExtResource("1_pmg1p")]
+position = Vector2(427, 93)
+data = SubResource("Resource_ebtvj")
+
+[node name="Particle4" parent="." instance=ExtResource("1_pmg1p")]
+position = Vector2(483, 262)
+data = SubResource("Resource_dldag")

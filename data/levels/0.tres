@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://7vif6x5sdmcq"]
+
+[ext_resource type="Script" path="res://data/custom/atom.gd" id="1_ku3ld"]
+[ext_resource type="Script" path="res://data/levels/level.gd" id="2_edv0g"]
+
+[sub_resource type="Resource" id="Resource_hxbbt"]
+script = ExtResource("1_ku3ld")
+n = 1
+bonds = Array[Resource("res://data/custom/bond.gd")]([])
+position = Vector2(200, 200)
+
+[sub_resource type="Resource" id="Resource_5m4l1"]
+script = ExtResource("1_ku3ld")
+n = 8
+bonds = Array[Resource("res://data/custom/bond.gd")]([])
+position = Vector2(500, 150)
+
+[sub_resource type="Resource" id="Resource_fxyyy"]
+script = ExtResource("1_ku3ld")
+n = 8
+bonds = Array[Resource("res://data/custom/bond.gd")]([])
+position = Vector2(500, 250)
+
+[resource]
+script = ExtResource("2_edv0g")
+name = ""
+particles = Array[Resource("res://data/custom/particle.gd")]([SubResource("Resource_hxbbt"), SubResource("Resource_5m4l1"), SubResource("Resource_fxyyy")])
+particle_palette = PackedColorArray(0.941176, 0.964706, 0.941176, 1)
+background = Color(0, 0, 0, 1)

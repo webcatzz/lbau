@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bnr3166d57c2i"]
+
+[ext_resource type="Script" path="res://data/levels/level.gd" id="1_ia6fk"]
+
+[resource]
+script = ExtResource("1_ia6fk")
+name = ""
+particles = Array[Resource("res://data/custom/particle.gd")]([])
+particle_palette = PackedColorArray()
+background = Color(0, 0, 0, 1)
