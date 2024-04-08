@@ -1,0 +1,42 @@
+:root {
+	--red: #f13a15;
+	--yellow: #e3c428;
+	--green: #76bc53;
+	--blue: #20a6f3;
+	--purple: #d168d1;
+	--white: #f8f3f0;
+	--gray: #908489;
+	--black: #262427;
+}
+
+body {color: var(--black); font: 16px sans-serif; background: linear-gradient(to bottom, var(--white), transparent 75%) fixed, url(halftone-bg.png) var(--white); margin: 0; user-select: none}
+canvas {position: fixed; inset: 0}
+
+h1 {
+	color: var(--white);
+	font-size: 3em; font-style: italic; letter-spacing: 0.1em;
+	text-shadow: 0 -0.05em var(--black), 0.1em -0.05em var(--black), 0.2em 0 var(--black), 0.1em 0.1em var(--color, var(--red)), 0 0.1em var(--black), -0.05em 0.1em var(--black), -0.05em 0 var(--black), -0.05em -0.1em var(--black);
+	margin-block: 0;
+
+	&::first-letter {font-size: 1.5em; line-height: 0}
+}
+
+button {all: unset; padding: 0.25em; cursor: pointer}
+
+.colored {
+	font-size: 20px; font-weight: bold; letter-spacing: 0.05em;
+	background-color: var(--color); border: 4px solid;
+	&:nth-of-type(6n - 4) {box-shadow: 4px 4px 0 -4px var(--color), 1px 1px 0 0 inset var(--white)}
+	&:nth-of-type(4n) {box-shadow: -4px -4px 0 -4px var(--color), -1px -1px 0 0 inset var(--white)}
+}
+.red {--color: var(--red)}
+.yellow {--color: var(--yellow)}
+.green {--color: var(--green)}
+.blue {--color: var(--blue)}
+.purple {--color: var(--purple)}
+.white {--color: var(--white)}
+.gray {--color: var(--gray)}
+.black {--color: var(--black)}
+.halftone {background-image: url(halftone.png); background-position: center}
+
+.hidden {display: none !important}

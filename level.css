@@ -1,0 +1,81 @@
+body {display: flex; flex-direction: column; height: 100vh; overflow: hidden}
+header {
+	display: flex;
+	background-color: var(--white); border-bottom: 4px solid var(--black);
+	z-index: 1;
+
+	& div {font-weight: bold; align-self: end}
+}
+h1 {line-height: 0.875; margin-right: auto}
+
+#game {contain: strict; position: relative; flex: 1; cursor: grab}
+#game:active {cursor: grabbing}
+canvas {position: absolute; inset: 0}
+#root {position: absolute}
+
+.hover {font-size: 0.75em; padding: 0.25em; border-width: 0.2em; transform: translateX(-50%); position: absolute; pointer-events: none}
+.input {
+	outline: none;
+	text-align: center;
+	position: absolute;
+}
+
+#info {
+	display: flex;
+	background-color: var(--white);
+	position: absolute; inset: 0;
+	cursor: auto;
+	lbau-table {margin: auto}
+}
+#pane {
+	width: 350px; padding: 2em 4em;
+	border-right: 4px solid var(--black);
+
+	& h2 {
+		background: linear-gradient(to top, transparent 0.6em, var(--white) 0.6em), linear-gradient(to right, var(--white) 0.3em, transparent 0.3em) var(--color);
+		margin-top: 0;
+	}
+}
+
+lbau-table {
+	display: grid; grid-template-columns: repeat(18, max-content);
+}
+.head {
+	color: var(--gray); font-size: 0.75em; text-align: center; padding-bottom: 1.5em;
+}
+.cell {
+	display: flex; justify-content: center; align-items: center;
+	width: 1.75em; aspect-ratio: 1; padding: 0; margin: -2px;
+	cursor: pointer;
+
+	&.empty {width: unset; aspect-ratio: unset; grid-column: 8/19}
+}
+
+
+/* game objects */
+
+.particle {
+	aspect-ratio: 1; border-radius: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+
+	transition: border-width 0.2s cubic-bezier(.09,.39,0,2.75);
+	&:hover:not(:active) {border-width: 6px}
+}
+
+.atom {
+	display: flex; justify-content: center; align-items: center;
+	min-width: 30px;
+}
+@keyframes rotate {to {rotate: 360deg}}
+.shell {
+	width: inherit; aspect-ratio: 1;
+	position: absolute;
+	animation: 1s rotate linear infinite;
+
+	& div {
+		background-color: var(--black);
+		width: 12px; aspect-ratio: 1; border-radius: 50%;
+		position: absolute; left: 50%;
+	}
+}
