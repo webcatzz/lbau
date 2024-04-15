@@ -14,6 +14,36 @@ canvas {position: absolute; inset: 0}
 #root {position: absolute}
 
 .hover {font-size: 0.75em; padding: 0.25em; border-width: 0.2em; transform: translateX(-50%); position: absolute; pointer-events: none}
+@keyframes dropdown {from {top: -40px; opacity: 0}}
+.tutorial-prompt {
+	--status: var(--red);
+	text-indent: 0.5em;
+	width: 250px;
+	padding: 0.5em;
+	border-color: var(--status);
+	position: absolute;
+	top: 80px; left: calc(50% - 125px);
+	animation: 1s dropdown;
+	pointer-events: none;
+
+	&::before {
+		content: "ⓘ";
+		color: var(--status);
+		font-size: 1.5em;
+		position: absolute;
+		top: -0.1em;
+		left: -0.75em;
+		text-shadow: 0 -0.1em var(--white), 0.1em -0.1em var(--white), 0.1em 0 var(--white), 0.1em 0.1em var(--white), 0 0.1em var(--white), -0.1em 0.1em var(--white), -0.1em 0 var(--white), -0.1em -0.1em var(--white);
+	}
+	&::after {
+		content: "tutorial...";
+		color: var(--status);
+		font-size: 0.625em;
+		position: absolute;
+		top: -1.25em;
+		left: -1em;
+	}
+}
 .input {
 	outline: none;
 	text-align: center;

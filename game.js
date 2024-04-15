@@ -113,6 +113,18 @@ onresize = () => {
 canvas.ctx.font = "bold 12px sans-serif", canvas.ctx.textAlign = "center";
 
 
+// tooltips
+function hover(el, text, x, y) {
+	let box = document.createElement("div");
+	box.innerHTML = text;
+	box.classList.add("colored", "white", "hover");
+	box.style.left = x + "px";
+	box.style.top = y + "px";
+	document.body.appendChild(box);
+	el.addEventListener("mouseout", () => box.remove());
+}
+
+
 // debug
 function note(...args) {
 	let message = [""];
@@ -947,7 +959,7 @@ document.querySelector("#info lbau-table").addEventListener("select", e => {
 	if (Object.keys(Atom.data).includes(String(atom.p))) {
 		let data = Atom.data[atom.p];
 		if (data.electronegativity) html += "<div><b>Electronegativity:</b> " + data.electronegativity + "</div>";
-		atom.addElectrons(-1);
+		atom.addElectrons(1);
 		let ionName = atom.getName().slice(0, -13);
 		if (ionName != name) html += "<div><b>Ion:</b> " + ionName + "</div>";
 	}

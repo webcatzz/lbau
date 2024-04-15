@@ -35,8 +35,8 @@ button {all: unset; padding: 0.25em; cursor: pointer}
 .blue {--color: var(--blue)}
 .purple {--color: var(--purple)}
 .white {--color: var(--white)}
-.gray {--color: var(--gray)}
+.gray, button[disabled] {--color: var(--gray)}
 .black {--color: var(--black)}
-.halftone {background-image: url(halftone.png); background-position: center}
+.halftone, button[disabled] {background-image: url(halftone.png); background-position: center}
 
 .hidden {display: none !important}
