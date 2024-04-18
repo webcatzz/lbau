@@ -3,7 +3,7 @@ async function tutorial() {
 
 	// adding atoms
 	await prompt(
-		"to add an atom, right click & enter an atomic symbol",
+		"to add an atom, right click & enter an atomic symbol (e.g. Na)",
 		new Promise(r => {
 			let observer = new MutationObserver(records => {
 				for (const record of records) for (const node of record.addedNodes) if (node instanceof Atom) {

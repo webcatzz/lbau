@@ -2,7 +2,7 @@ oncontextmenu = () => {return false};
 
 // game
 const game = {
-	atoms: [], bonds: [], molecules: [],
+	atoms: [], bonds: [],// molecules: [],
 	add: (el, arr) => arr.push(el),
 	remove: (el, arr) => arr.splice(arr.indexOf(el), 1),
 
@@ -23,8 +23,9 @@ const game = {
 				}
 			}
 		}
-		// bonds
+		// other physics bits
 		for (const bond of game.bonds) bond.tick();
+		// for (const molecule of game.molecules) molecule.tick();
 		// canvas
 		canvas.redraw();
 	},
@@ -66,7 +67,6 @@ const canvas = {
 	redraw: () => {
 		canvas.ctx.clearRect(0, 0, canvas.el.width, canvas.el.height);
 		for (const bond of game.bonds) bond.draw();
-		for (const molecule of game.molecules) molecule.draw();
 		if (canvas.trajectory) canvas.draw("line", canvas.trajectory);
 	},
 
@@ -188,9 +188,14 @@ class Bond {
 		else this.b.updateBonds();
 		game.add(this, game.bonds);
 
-		if (this.a.molecule) this.a.molecule.add(this.b);
-		else if (this.b.molecule) this.b.molecule.add(this.a);
-		else new Molecule(this.a, this.b);
+		// if (this.a.molecule) this.a.molecule.add(this.b);
+		// else if (this.b.molecule) this.b.molecule.add(this.a);
+		// else {
+		// 	let mol = document.createElement("lbau-molecule");
+		// 	mol.add(this.a);
+		// 	mol.add(this.b);
+		// 	game.root.prepend(mol);
+		// }
 	}
 
 	vector = {x: 0, y: -64};
@@ -695,7 +700,17 @@ class Atom extends Particle {
 		// physics
 		game.add(this, game.atoms);
 		// tooltip
-		this.onmouseover = () => hover(this, this.getName(), this.x + game.x, this.y + game.y + (this.clientWidth / 2) + 60);
+		this.onmouseover = () => hover(
+			this,
+			`<div style="text-align: center">
+				<div>${this.getName()}</div>
+				<div style="color: var(--gray); font-size: 0.75em; margin-top: 0.5em">electron cloud:</div>
+				<div>${this.cloud[1]} ${this.cloud[2]} ${this.cloud[3]} ${this.cloud[4]} ${this.cloud[5]} ${this.cloud[6]}</div>
+				<div style="color: var(--gray); font-size: 0.75em">${this.electronNeed ? `wants ${this.electronNeed}e<sup>-</sup>` : "satisfied!"}</div>
+			</div>`,
+			this.x + game.x,
+			this.y + game.y + (this.clientWidth / 2) + 60
+		);
 		// ptable
 		this.onauxclick = e => {
 			let info = document.getElementById("info");
@@ -864,41 +879,54 @@ class Atom extends Particle {
 
 
 // molecules
-class Molecule {
-	atoms = [];
+// class Molecule extends HTMLElement {
+// 	atoms = [];
+	
+// 	connectedCallback() {
+// 		game.molecules.push(this);
+// 		this.onmouseover = () => {
 
-	constructor(...atoms) {
-		for (const atom of atoms) this.add(atom);
-		game.molecules.push(this);
-	}
+// 			hover(
+// 				this,
+// 				`<div>bonds</div>`,
+// 				game.x + this.rect.x + this.rect.width/2,
+// 				game.y + this.rect.y,
+// 			);
+// 		}
+// 	}
 
-	add(atom) {
-		if (atom.molecule != this) {
-			atom.molecule = this;
-			this.atoms.push(atom);
-		}
-	}
+// 	add(atom) {
+// 		if (atom.molecule != this) {
+// 			atom.molecule = this;
+// 			this.atoms.push(atom);
+// 		}
+// 	}
 
-	draw() {
-		// let minX = this.atoms[0].x, maxX = minX;
-		// let minY = this.atoms[0].y, maxY = minY;
-		// for (const atom of this.atoms) {
-		// 	if (atom.x < minX) minX = atom.x;
-		// 	else if (atom.x > maxX) maxX = atom.x;
-		// 	if (atom.y < minY) minY = atom.y;
-		// 	else if (atom.y > maxY) maxY = atom.y;
-		// }
-		// canvas.draw("rect", {
-		// 	stroke: palette.gray, width: 2, dashed: true,
-		// 	x1: minX - 40,
-		// 	y1: minY - 40,
-		// 	x2: maxX + 40,
-		// 	y2: maxY + 40,
-		// });
-	}
+// 	updateRect() {
+// 		let minX = this.atoms[0].x, maxX = minX;
+// 		let minY = this.atoms[0].y, maxY = minY;
+// 		for (const atom of this.atoms) {
+// 			if (atom.x < minX) minX = atom.x;
+// 			else if (atom.x > maxX) maxX = atom.x;
+// 			if (atom.y < minY) minY = atom.y;
+// 			else if (atom.y > maxY) maxY = atom.y;
+// 		}
+// 		this.rect = {
+// 			x: minX - 40,
+// 			y: minY - 40,
+// 			width: maxX - minX + 80,
+// 			height: maxY - minY + 80,
+// 		}
+// 	}
+// 	tick() {
+// 		this.updateRect();
+// 		this.style.left = this.rect.x + "px";
+// 		this.style.top = this.rect.y + "px";
+// 		this.style.width = this.rect.width + "px";
+// 		this.style.height = this.rect.height + "px";
+// 	}
 
-
-}
+// }
 
 
 // periodic table
@@ -930,6 +958,7 @@ class PeriodicTable extends HTMLElement {
 
 // defining custom classes
 window.customElements.define("lbau-atom", Atom);
+// window.customElements.define("lbau-molecule", Molecule);
 window.customElements.define("lbau-table", PeriodicTable);
 
 

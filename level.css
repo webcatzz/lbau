@@ -109,3 +109,6 @@ lbau-table {
 		position: absolute; left: 50%;
 	}
 }
+
+
+lbau-molecule {display: block; position: absolute}
