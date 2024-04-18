@@ -45,6 +45,7 @@ async function tutorial() {
 		"atoms might react when close enough. bond two atoms (for example, Na and Cl)",
 		checkWithInterval(() => {return Boolean(game.bonds.length)})
 	);
+	await prompt("if you made NaCl, Cl is now an anion! hover over it to see its new charge and name");
 	await prompt("try building more complex structures! (for example, NH<sub>3</sub>)");
 
 	// periodic table
